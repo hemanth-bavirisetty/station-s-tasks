@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- If using custom config -->
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                gradientColorStops: {
+                    'custom-rainbow': {
+                        'red': 'rgba(239, 68, 68, 0.3)',
+                        'yellow': 'rgba(234, 179, 8, 0.3)',
+                        'green': 'rgba(34, 197, 94, 0.3)',
+                        'blue': 'rgba(59, 130, 246, 0.3)',
+                    }
+                }
+            }
+        }
+    }
+</script>
+
+<body class="bg-gray-300 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+
+</html>

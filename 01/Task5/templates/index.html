@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>GitHub User Profile</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" />
+</head>
+
+<body class="bg-gray-100 p-4">
+    <div class="container mx-auto    rounded-lg shadow-md p-6">
+        <h1 class="text-2xl font-bold text-gray-800 mb-4">{{ name }}</h1>
+        <div class="flex items-center mb-4">
+            <img src="{{ avatar_url }}" alt="Profile Avatar" class="rounded-full w-24 h-24">
+            <div class="ml-4">
+                <p class="text-gray-600 mb-1">{{ bio }}</p>
+                <div class="flex space-x-2">
+                    <span class="font-bold text-gray-800">Followers:</span>
+                    <span class="text-gray-600">{{ followers }}</span>
+                    <span class="font-bold text-gray-800">Following:</span>
+                    <span class="text-gray-600">{{ following }}</span>
+                    <span class="font-bold text-gray-800">Repos:</span>
+                    <span class="text-gray-600">{{ public_repos }}</span>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="text-xl font-bold text-gray-800 mb-2">Repositories</h2>
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">Name</th>
+                    <th scope="col" class="px-4 py-3">Description</th>
+                    <th scope="col" class="px-6 py-3">Last Updated</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for repo in repos %}
+                <tr>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <a href="{{ repo['html_url'] }}" target="_blank">{{ repo['name'] }}</a>
+                    </td>
+                    <td class="px-4 py-4 whitespace-nowrap">{{ repo['description'] }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">{{ repo['updated_at'][:10] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html

@@ -1,0 +1,12 @@
+body{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  
+}
+
+h1{
+  color:red;  
+  font-size: 10rem;
+  margin: auto;
+}
