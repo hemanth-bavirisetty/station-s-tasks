@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Management System - Dashboard</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <style>
+    body {
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Task Management System - Dashboard</h1>
+        <button class="btn btn-primary" id="create-task-btn">Create Task</button>
+        <button class="btn btn-danger" id="logout-btn">Logout</button>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Description</th>
+              <th>Priority</th>
+              <th>Status</th>
+              <th>Deadline</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="task-list">
+            <!-- Task list will be displayed here -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Load task list from local storage
+      var taskList = JSON.parse(localStorage.getItem("taskList"));
+      if (taskList) {
+        $.each(taskList, function(index, task) {
+          var row = $("<tr>");
+          row.append($("<td>").text(task.title));
+          row.append($("<td>").text(task.description));
+          row.append($("<td>").text(task.priority));
+          row.append($("<td>").text(task.status));
+          row.append($("<td>").text(task.deadline));
+          row.append($("<td>").html("<button class='btn btn-primary'>Edit</button> <button class='btn btn-danger'>Delete</button>"));
+          $("#task-list").append(row);
+        });
+      }
+
+      // Create task button click event
+      $("#create-task-btn").click(function() {
+        window.location.href = "create-task.html";
+      });
+
+      // Logout button click event
+      $("#logout-btn").click(function() {
+        window.location.href = "index.html";
+      });
+    });
+  </script>
+</body>
+</html>
