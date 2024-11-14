@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/your_font_awesome_kit_id.js" crossorigin="anonymous"></script>
+    <style>
+        /* static/dashboard/css/styles.css */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .sidebar {
+            background-color: #343a40;
+            height: 100vh;
+        }
+
+        .sidebar .nav-link {
+            color: white;
+        }
+
+        .sidebar .nav-link:hover {
+            background-color: #495057;
+        }
+
+        .card {
+            border-radius: 10px;
+        }
+
+        .card-footer {
+            background-color: #343a40;
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+
+    <div class="flex">
+        <div class="sidebar w-64 p-4">
+            <h2 class="text-white font-bold mb-4">Admin Dashboard</h2>
+            <ul class="space-y-2">
+                <li>
+                    <a href="#" class="block py-2 px-4 rounded-md nav-link">
+                        <i class="fas fa-home mr-2"></i> Home
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="block py-2 px-4 rounded-md nav-link">
+                        <i class="fas fa-users mr-2"></i> Users
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="block py-2 px-4 rounded-md nav-link">
+                        <i class="fas fa-chart-bar mr-2"></i> Analytics
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="block py-2 px-4 rounded-md nav-link">
+                        <i class="fas fa-cog mr-2"></i> Settings
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="flex-grow m-8 p-4">
+            <h1 class="text-4xl font-bold text-gray-800 mb-4">Welcome to the Admin Dashboard</h1>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-8 mb-8">
+                <div class="bg-blue-500 text-white rounded-lg shadow-md p-4 card">
+                    <div class="flex items-center justify-between mb-2">
+                        <h2 class="text-lg font-bold">Total Users</h2>
+                        <i class="fas fa-users text-white"></i>
+                    </div>
+                    <p class="text-2xl font-bold">150</p>
+                    <div class="card-footer  rounded-lg opacity-50 m-2 py-2 px-4">
+                        <button class="text-sm">View Details</button>
+                    </div>
+                </div>
+                <div class="bg-green-500 text-white rounded-lg shadow-md p-4 card">
+                    <div class="flex items-center justify-between mb-2">
+                        <h2 class="text-lg font-bold">Active Sessions</h2>
+                        <i class="fas fa-signal text-white"></i>
+                    </div>
+                    <p class="text-2xl font-bold">80</p>
+                    <div class="card-footer  rounded-lg opacity-50 m-2 py-2 px-4">
+                        <button class="text-sm">View Details</button>
+                    </div>
+                </div>
+                <div class="bg-blue-500 text-white rounded-lg shadow-md p-4 card">
+                    <div class="flex items-center justify-between mb-2">
+                        <h2 class="text-lg font-bold">Pending Orders</h2>
+                        <i class="fas fa-box text-white"></i>
+                    </div>
+                    <p class="text-2xl font-bold">20</p>
+                    <div class="card-footer  rounded-lg opacity-50 m-2 py-2 px-4">
+                        <button class="text-sm">View Details</button>
+                    </div>
+                </div>
+                <div class="bg-red-500 text-white rounded-lg shadow-md p-4 card">
+                    <div class="flex items-center justify-between mb-2">
+                        <h2 class="text-lg font-bold">Alerts</h2>
+                        <i class="fas fa-exclamation-circle text-white"></i>
+                    </div>
+                    <p class="text-2xl font-bold">5</p>
+                    <div class="card-footer  rounded-lg opacity-50 m-2 py-2 px-4">
+                        <button class="text-sm">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-4">
+                <h2 class="text-xl font-bold text-gray-800 mb-4">Recent Activity</h2>
+                <ul class="list-disc pl-5">
+                    <li>New user registered</li>
+                    <li>Order #1503 shipped</li>
+                    <li>System update applied</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+/* static/dashboard/css/styles.css */
+body {
+    font-family: Arial, sans-serif;
+}
+
+.sidebar {
+    background-color: #343a40;
+    height: 100vh;
+}
+
+.sidebar .nav-link {
+    color: white;
+}
+
+.sidebar .nav-link:hover {
+    background-color: #495057;
+}
+
+.card {
+    border-radius: 10px;
+}
+
+.card-footer {
+    background-color: #343a40;
+    color: white;
+}
