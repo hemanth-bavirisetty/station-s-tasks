@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+  <h1 class="text-center mb-4">Currency Converter</h1>
+
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="source_currency">Source Currency:</label>
+          <select class="form-control" id="source_currency" name="source_currency">
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="GBP">GBP</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="target_currency">Target Currency:</label>
+          <select class="form-control" id="target_currency" name="target_currency">
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="GBP">GBP</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="amount">Amount to Convert:</label>
+          <input type="number" class="form-control" id="amount" name="amount" placeholder="Enter amount">
+        </div>
+        <button type="submit" class="btn btn-primary">Convert</button>
+      </form>
+
+      <div class="text-center mt-4">
+        <span class="animated-currency">$</span> <span class="text-muted">Currency Symbol</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-md-12 text-center">
+      <a href="{% url 'login' %}" class="btn btn-secondary">Login</a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.animated-currency {
+  font-size: 3em;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+</style>
+{% endblock %}

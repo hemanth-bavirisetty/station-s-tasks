@@ -1,5 +1,5 @@
 """
-URL configuration for myblog project.
+URL configuration for currency_converter project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.1/topics/http/urls/
@@ -16,8 +16,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.contrib.auth import views as auth_views
+
+from converter import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('blog.urls')),  # Add this line
+    path('', views.home, name='home'),
+    path('signup/', views.signup, name='signup'),
+    path('login/', views.login_view, name='login'), 
+    path('logout/', views.logout_view, name='logout'),
+    path('conversion_history/', views.conversion_history, name='conversion_history'),
+    # ... other URL patterns ...
 ]
