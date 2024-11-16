@@ -1,11 +1,15 @@
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Heart } from "lucide-react";
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../utils/AuthContext';
 
 const LoginPage = () => {
   const { register, handleSubmit, formState: { errors }, setError } = useForm();
   const [loading, setLoading] = useState(false);
+  const { login } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     setLoading(true);
@@ -13,8 +17,12 @@ const LoginPage = () => {
       const response = await axios.post('http://localhost:8000/api/login/', data);
       setLoading(false);
       // Handle successful login
+      const accessToken = response.data?.access ?? ' '
+      console.log(accessToken)
       console.log(response)
       console.log('Login successful');
+      login()
+      navigate('/dashboard', { replace: true });
       // You can redirect the user to a protected route here
     } catch (error) {
       setLoading(false);
