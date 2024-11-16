@@ -5,7 +5,7 @@ import { Separator } from "./separator";
 import { Sidebar } from "./sidebar";
 import { Skeleton } from "./skeleton";
 import { Tooltip } from "./tooltip";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "./card";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle,CardDescription, } from "./card";
 import { Textarea } from "./textarea";
 import { Dialog, DialogContent, DialogTitle, DialogDescription, DialogFooter } from "./dialog";
 import {
@@ -15,11 +15,11 @@ import {
     SelectTrigger,
     SelectValue,
 } from "./select";
-
+import { Label } from "./label";
 export {
     Button, Input, Sheet, Separator, Sidebar, Skeleton, Tooltip, Card, CardContent, CardFooter, CardHeader, CardTitle, Textarea, Dialog, DialogContent, DialogTitle, DialogDescription, DialogFooter, Select,
     SelectContent,
     SelectItem,
-    SelectTrigger,
-    SelectValue,
+    SelectTrigger,Label,
+    SelectValue,CardDescription,
 }
