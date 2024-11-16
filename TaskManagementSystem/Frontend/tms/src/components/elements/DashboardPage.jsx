@@ -1,11 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { PlusCircle } from 'lucide-react';
 import { TaskCard } from './TaskCard';
 import { TaskForm } from './TaskForm';
 import { TaskFilters } from './TaskFilters';
 import { TaskStats } from './TaskStats';
+import { AuthContext } from '../../utils/AuthContext';
+import axios from 'axios';
 
 function DashboardPage() {
+    const { accessTk } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
+
     const [tasks, setTasks] = useState(() => {
         const saved = localStorage.getItem('tasks');
         return saved ? JSON.parse(saved) : [];
@@ -20,12 +25,28 @@ function DashboardPage() {
     });
 
     useEffect(() => {
+        async function fetchtasks() {
+            const response = await axios.get(`http://127.0.0.1:8000/api/tasks/list/`, {
+                headers: {
+                    'Authorization': 'Bearer ' + accessTk,
+                }
+            });
+            setTasks(response.data?.results);
+            console.log(response);
+        }
+        fetchtasks();
+    }, []);
+
+    useEffect(() => {
         localStorage.setItem('tasks', JSON.stringify(tasks));
     }, [tasks]);
+
+    console.log(tasks);
 
     const handleCreateTask = (taskData) => {
         const newTask = {
             ...taskData,
+            createdby: user.username,
             id: crypto.randomUUID(),
             createdAt: new Date().toISOString(),
         };
@@ -64,25 +85,24 @@ function DashboardPage() {
         return matchesStatus && matchesPriority && matchesSearch;
     });
 
-
     return (
-        <div className="min-h-screen bg-gray-50">
-            <div className="max-w-7xl mx-auto px-4 py-8">
+        <div className="min-h-screen bg-gray-50 ">
+            <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center mb-8">
-                    <h1 className="text-3xl font-bold text-gray-900">Task Management</h1>
+                    <h1 className="text-3xl font-bold text-gray-900 sm:text-4xl">Task Management</h1>
                     <button
                         onClick={() => setShowForm(true)}
-                        className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                        className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 sm:px-6 sm:py-3"
                     >
                         <PlusCircle className="w-5 h-5 mr-2" />
-                        New Task
+                        <span className="hidden sm:inline">New Task</span>
                     </button>
                 </div>
 
                 <TaskStats tasks={tasks} />
                 <TaskFilters filters={filters} onFilterChange={setFilters} />
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     {filteredTasks.map((task) => (
                         <TaskCard
                             key={task.id}

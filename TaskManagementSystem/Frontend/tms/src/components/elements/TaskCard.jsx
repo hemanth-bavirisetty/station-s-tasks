@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { Clock, Flag, MoreVertical } from 'lucide-react';
+import { AuthContext } from '../../utils/AuthContext';
+import axios from 'axios';
+
 
 
 
@@ -18,6 +21,7 @@ const statusColors = {
 };
 
 export function TaskCard({ task, onStatusChange, onEdit, onDelete }) {
+  const { accessTk } = useContext(AuthContext);
   const daysUntilDeadline = Math.ceil(
     (new Date(task.deadline).getTime() - new Date().getTime()) / (1000 * 3600 * 24)
   );
@@ -39,7 +43,20 @@ export function TaskCard({ task, onStatusChange, onEdit, onDelete }) {
                 Edit
               </button>
               <button
-                onClick={() => onDelete(task.id)}
+                onClick={async function () {
+                  try {
+                    console.log(task.taskid)
+                    console.log(accessTk)
+                    const response = await axios.delete(`http://localhost:8000/api/tasks/delete/${task.id ?? task.taskid}/`, {
+                      headers: {
+                        'Authorization': 'Bearer ' + accessTk, // or 'Basic YOUR_CREDENTIALS'
+                      }
+                    });
+                    onDelete(task.id)
+                  } catch (error) {
+                    console.log(error)
+                  };
+                }}
                 className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
               >
                 Delete
@@ -58,13 +75,13 @@ export function TaskCard({ task, onStatusChange, onEdit, onDelete }) {
         </span>
         <select
           value={task.status}
-          onChange={(e) => onStatusChange(task.id, e.target.value)}
+          onChange={function (e) { onStatusChange(task.id, e.target.value) }}
           className={`px-2 py-1 rounded-full text-xs font-medium border-0 cursor-pointer ${statusColors[task.status]}`}
         >
-          <option value="todo">To Do</option>
-          <option value="in-progress">In Progress</option>
+          <option value="'yet-to-start">Yet to start</option>
+          <option value="in-progress">In progress</option>
           <option value="completed">Completed</option>
-          <option value="on-hold">On Hold</option>
+          <option value="hold">Hold</option>
         </select>
       </div>
 

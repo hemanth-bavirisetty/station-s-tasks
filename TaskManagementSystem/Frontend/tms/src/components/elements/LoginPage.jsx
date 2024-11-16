@@ -8,7 +8,7 @@ import { AuthContext } from '../../utils/AuthContext';
 const LoginPage = () => {
   const { register, handleSubmit, formState: { errors }, setError } = useForm();
   const [loading, setLoading] = useState(false);
-  const { login } = useContext(AuthContext);
+  const { login, setAccessTk} = useContext(AuthContext);
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
@@ -18,6 +18,7 @@ const LoginPage = () => {
       setLoading(false);
       // Handle successful login
       const accessToken = response.data?.access ?? ' '
+      setAccessTk(accessToken);
       console.log(accessToken)
       console.log(response)
       console.log('Login successful');
