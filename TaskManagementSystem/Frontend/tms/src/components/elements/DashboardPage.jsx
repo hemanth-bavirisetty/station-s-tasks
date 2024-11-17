@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { PlusCircle } from 'lucide-react';
 import { TaskCard } from './TaskCard';
 import { TaskForm } from './TaskForm';
@@ -6,6 +6,7 @@ import { TaskFilters } from './TaskFilters';
 import { TaskStats } from './TaskStats';
 import { AuthContext } from '../../utils/AuthContext';
 import axios from 'axios';
+import { Button } from '../ui';
 
 function DashboardPage() {
     const { accessTk } = useContext(AuthContext);
@@ -35,7 +36,7 @@ function DashboardPage() {
             console.log(response);
         }
         fetchtasks();
-    }, []);
+    },[accessTk]);
 
     useEffect(() => {
         localStorage.setItem('tasks', JSON.stringify(tasks));
@@ -90,13 +91,13 @@ function DashboardPage() {
             <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center mb-8">
                     <h1 className="text-3xl font-bold text-gray-900 sm:text-4xl">Task Management</h1>
-                    <button
+                    <Button
                         onClick={() => setShowForm(true)}
-                        className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 sm:px-6 sm:py-3"
+                        className=""
                     >
-                        <PlusCircle className="w-5 h-5 mr-2" />
+                        <PlusCircle className="w-5 h-5 lg:mr-2" />
                         <span className="hidden sm:inline">New Task</span>
-                    </button>
+                    </Button>
                 </div>
 
                 <TaskStats tasks={tasks} />

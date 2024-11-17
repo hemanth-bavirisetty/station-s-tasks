@@ -1,16 +1,20 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../../utils/AuthContext';
 import axios from 'axios';
-
 import {
     Select,
     SelectContent,
     SelectItem,
     SelectTrigger,
     SelectValue,
-    Textarea
-} from "../ui"
-
+    Textarea,
+    Input,
+    Button,
+    Card,
+    CardContent,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui";
 
 export function TaskForm({ task, onSubmit, onClose }) {
     const { accessTk } = useContext(AuthContext);
@@ -40,130 +44,135 @@ export function TaskForm({ task, onSubmit, onClose }) {
         e.preventDefault();
         try {
             console.log(formData);
-            console.log(accessTk)
+            console.log(accessTk);
             if (!task) {
                 const response = await axios.post('http://localhost:8000/api/tasks/', formData, {
                     headers: {
-                        'Authorization': 'Bearer ' + accessTk, // or 'Basic YOUR_CREDENTIALS'
+                        'Authorization': 'Bearer ' + accessTk,
                     }
                 });
                 setLoading(false);
-                const taskid = response.data?.id
-                setTaskId(taskid)
-                console.log(response.data?.id)
-                // Handle successful login
-                console.log(response)
-                const submitionData = { ...formData, taskid }
+                const taskid = response.data?.id;
+                setTaskId(taskid);
+                console.log(response.data?.id);
+                const submitionData = { ...formData, taskid };
                 onSubmit(submitionData);
             } else {
                 const response = await axios.put(`http://localhost:8000/api/tasks/${task.taskid ?? task.id}/`, formData, {
                     headers: {
-                        'Authorization': 'Bearer ' + accessTk, // or 'Basic YOUR_CREDENTIALS'
+                        'Authorization': 'Bearer ' + accessTk,
                     }
                 });
                 setLoading(false);
-
-                console.log(response)
+                console.log(response);
                 onSubmit(formData);
             }
-            //navigate('/dashboard', { replace: true });
-            // You can redirect the user to a protected route here
         } catch (error) {
             setLoading(false);
-            console.log(error)
-        };
+            console.log(error);
+        }
         onClose();
     };
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
-            <div className="bg-white rounded-lg max-w-md w-full p-6">
-                <h2 className="text-xl font-semibold mb-4">{task ? 'Edit Task' : 'Create New Task'}</h2>
-                <form onSubmit={handleSubmit}>
-                    <div className="space-y-4">
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700">Title</label>
-                            <input
-                                type="text"
-                                required
-                                value={formData.title}
-                                onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                            />
-                        </div>
-
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700">Description</label>
-                            <Textarea
-                                required
-                                value={formData.description}
-                                onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                                rows={3}
-                            />
-                        </div>
-
-                        <div className="grid grid-cols-2 gap-4">
+            <Card className="max-w-md w-full lg:p-6 ">
+                <CardHeader>
+                    <CardTitle className="text-xl font-semibold ">{task ? 'Edit Task' : 'Create New Task'}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                    <form onSubmit={handleSubmit}>
+                        <div className="space-y-4">
                             <div>
-                                <label className="block text-sm font-medium text-gray-700">Priority</label>
-                                <select
-                                    value={formData.priority}
-                                    onChange={(e) => setFormData({ ...formData, priority: e.target.value })}
-                                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                                >
-                                    <option value="low">Low</option>
-                                    <option value="medium">Medium</option>
-                                    <option value="high">High</option>
-                                </select>
+                                <label className="block text-sm font-medium text-gray-700">Title</label>
+                                <Input
+                                    type="text"
+                                    required
+                                    value={formData.title}
+                                    onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                                    className="mt-1 "
+                                />
                             </div>
 
                             <div>
-                                <label className="block text-sm font-medium text-gray-700">Status</label>
-                                <select
-                                    value={formData.status}
-                                    onChange={(e) => setFormData({ ...formData, status: e.target.value })}
-                                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                                >
-                                    <option value="yet-to-start">Yet to start</option>
-                                    <option value="in-progress">In progress</option>
-                                    <option value="completed">Completed</option>
-                                    <option value="hold">Hold</option>
+                                <label className="block text-sm font-medium text-gray-700">Description</label>
+                                <Textarea
+                                    required
+                                    value={formData.description}
+                                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                                    className="mt-1"
+                                    rows={3}
+                                />
+                            </div>
 
-                                </select>
+                            <div className="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700">Priority</label>
+                                    <Select
+                                        value={formData.priority}
+                                        onValueChange={(value) => setFormData({ ...formData, priority: value })}
+                                    >
+                                        <SelectTrigger >
+                                            <SelectValue placeholder="Select Priority" />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            <SelectItem value="low">Low</SelectItem>
+                                            <SelectItem value="medium">Medium</SelectItem>
+                                            <SelectItem value="high">High</SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                </div>
+
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700">Status</label>
+                                    <Select
+                                        value={formData.status}
+                                        onValueChange={(value) => setFormData({ ...formData, status: value })}
+                                    >
+                                        <SelectTrigger >
+                                            <SelectValue placeholder="Select Status" />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            <SelectItem value="yet-to-start">Yet to start</SelectItem>
+                                            <SelectItem value="in-progress">In progress</SelectItem>
+                                            <SelectItem value="completed">Completed</SelectItem>
+                                            <SelectItem value="hold">Hold</SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700">Deadline</label>
+                                <Input
+                                    type="date"
+                                    required
+                                    value={formData.deadline}
+                                    onChange={(e) => setFormData({ ...formData, deadline: e.target.value })}
+                                    className="mt-1 block w-full rounded-md"
+                                />
                             </div>
                         </div>
 
-
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700">Deadline</label>
-                            <input
-                                type="date"
-                                required
-                                value={formData.deadline}
-                                onChange={(e) => setFormData({ ...formData, deadline: e.target.value })}
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                            />
+                        <div className="mt-6 flex justify-end space-x-3">
+                            <Button
+                                type="button"
+                                onClick={onClose}
+                                variant="outline"
+                                
+                            >
+                                Cancel
+                            </Button>
+                            <Button
+                                disabled={loading}
+                                type="submit"
+                            >
+                                {task ? 'Update Task' : 'Create Task'}
+                            </Button>
                         </div>
-                    </div>
-
-                    <div className="mt-6 flex justify-end space-x-3">
-                        <button
-                            type="button"
-                            onClick={onClose}
-                            className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
-                        >
-                            Cancel
-                        </button>
-                        <button
-                            disabled={loading}
-                            type="submit"
-                            className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700"
-                        >
-                            {task ? 'Update Task' : 'Create Task'}
-                        </button>
-                    </div>
-                </form>
-            </div>
+                    </form>
+                </CardContent>
+            </Card>
         </div>
     );
 }

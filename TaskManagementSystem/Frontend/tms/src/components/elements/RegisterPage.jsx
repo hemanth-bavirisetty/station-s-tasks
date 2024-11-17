@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -51,18 +51,23 @@ const RegisterPage = () => {
     };
 
     return (
-        <div className="flex justify-center items-center h-screen bg-gray-100">
-            <Card className="w-1/3">
+        <div className="flex justify-center items-center h-full  lg:py-10 lg:px-2 mx-auto bg-gradient-to-br
+from-red-500/50 
+via-yellow-500/50 
+via-green-500/50 
+to-blue-500/50  shadow-md p-6">
+            <Card className="w-full h-full max-w-md p-4 sm:p-6 md:p-8">
                 <CardHeader>
-                    <CardTitle className="text-2xl font-bold mb-4">Register</CardTitle>
+                    <CardTitle className="text-3xl font-bold mb-4">Register</CardTitle>
                     <CardDescription className="text-md">Create a new account</CardDescription>
                 </CardHeader>
                 <CardContent>
                     <form onSubmit={handleSubmit(onSubmit)}>
-                        <div className="mb-4">
+                        <div className="mb-4 ">
                             <Label htmlFor="email">Email</Label>
                             <Input
                                 type="email"
+                                placeholder="Enter Email"
                                 id="email"
                                 {...register('email', {
                                     required: 'Email is required',
@@ -78,6 +83,7 @@ const RegisterPage = () => {
                             <Label htmlFor="username">Username</Label>
                             <Input
                                 type="text"
+                                placeholder="Enter Username"
                                 id="username"
                                 {...register('username', {
                                     required: 'Username is required',
@@ -89,6 +95,7 @@ const RegisterPage = () => {
                             <Label htmlFor="first_name">First Name</Label>
                             <Input
                                 type="text"
+                                placeholder="Enter First Name"
                                 id="first_name"
                                 {...register('first_name', {
                                     required: 'First name is required',
@@ -100,6 +107,7 @@ const RegisterPage = () => {
                             <Label htmlFor="last_name">Last Name</Label>
                             <Input
                                 type="text"
+                                placeholder="Enter Last Name"
                                 id="last_name"
                                 {...register('last_name', {
                                     required: 'Last name is required',
@@ -111,6 +119,7 @@ const RegisterPage = () => {
                             <Label htmlFor="password">Password</Label>
                             <Input
                                 type="password"
+                                placeholder="Enter Password"
                                 id="password"
                                 {...register('password', {
                                     required: 'Password is required',
@@ -126,6 +135,7 @@ const RegisterPage = () => {
                             <Label htmlFor="passwordAgain">Password Again</Label>
                             <Input
                                 type="password"
+                                placeholder="Repeat Password"
                                 id="passwordAgain"
                                 {...register('passwordAgain', {
                                     required: 'Password again is required',
@@ -136,22 +146,22 @@ const RegisterPage = () => {
                         </div>
                     </form>
                 </CardContent>
-                <CardFooter className="flex justify-between items-center">
-                    <Button type="submit" onClick={handleSubmit(onSubmit)}>
+                <CardFooter className="flex flex-col space-y-4 sm:flex-row sm:justify-between sm:items-center">
+                    <Button type="submit" onClick={handleSubmit(onSubmit)} className="w-full sm:w-auto">
                         Register
                     </Button>
-                    <Link to="/login" className="text-blue-500 hover:text-blue-700">
+                    <Link to="/login" className="text-blue-500 hover:text-blue-700 w-full text-center sm:w-auto">
                         Already have an account? Login
                     </Link>
                 </CardFooter>
-                <CardFooter>
-                    <Button variant="outline" onClick={() => window.history.back()}>
+                <CardFooter className="flex justify-center">
+                    <Button variant="outline" onClick={() => window.history.back()} className="w-full sm:w-auto">
                         <ArrowLeft className="mr-2" />
                         Back
                     </Button>
                 </CardFooter>
                 {formStatus && formStatus !== 'Passwords do not match' && (
-                    <p className="text-green-500 text-xs italic">{formStatus}</p>
+                    <p className="text-green-500 text-xs italic text-center mt-4">{formStatus}</p>
                 )}
             </Card>
         </div>

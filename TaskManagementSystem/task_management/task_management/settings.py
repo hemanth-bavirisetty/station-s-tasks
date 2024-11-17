@@ -76,7 +76,7 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),  # Access token lifetime (short-lived)
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),  # Access token lifetime (short-lived)
     'REFRESH_TOKEN_LIFETIME': timedelta(days=7),     # Refresh token lifetime (long-lived)
     'ROTATE_REFRESH_TOKENS': True,                    # Enable rotating refresh tokens (good for security)
     'BLACKLIST_AFTER_ROTATION': True,                 # Blacklist old refresh tokens after they are rotated
@@ -113,7 +113,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'task_management_db',  # Your database name
         'USER': 'root',                # MySQL user
-        'PASSWORD': 'admin',   # MySQL user password
+        'PASSWORD': '5454',   # MySQL user password
         'HOST': 'localhost',           # Use 'localhost' or IP address of MySQL server
         'PORT': '3306',
     }

@@ -1,4 +1,4 @@
-import { Calendar, CircleUser, Home, Inbox, Search, Settings } from "lucide-react"
+import {  CircleUser, Home, Inbox, Settings } from "lucide-react"
 import { Link } from "react-router-dom"
 import {
     Sidebar,
@@ -9,21 +9,16 @@ import {
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
-    SidebarFooter
+    SidebarFooter,
 } from "@/components/ui/sidebar"
-import { Button } from "../ui"
+import { Button} from "@/components/ui"
 
-// Menu items.
+// Menu items.  
 const items = [
     {
         title: "Dashboard",
         url: "/dashboard",
         icon: Home,
-    },
-    {
-        title: "Profile",
-        url: "/profile",
-        icon: Inbox,
     },
     {
         title: "Settings",
@@ -35,7 +30,6 @@ const items = [
         url: "/logout",
         icon: CircleUser,
     },
-
 ]
 
 export function AppSidebar() {
@@ -48,12 +42,12 @@ export function AppSidebar() {
             <SidebarGroup>
                     <SidebarGroupLabel>Application</SidebarGroupLabel>
                     <SidebarGroupContent>
-                        <SidebarMenu >
+                        <SidebarMenu>
                             {items.map((item) => (
                                 <SidebarMenuItem key={item.title}>
-                                    <SidebarMenuButton asChild >
-                                        <Link to={item.url}>
-                                            <item.icon className="w-12 h-12" />
+                                    <SidebarMenuButton asChild>
+                                        <Link to={item.url} className="flex items-center space-x-2">
+                                            <item.icon className="w-6 h-6" />
                                             <span className="text-md">{item.title}</span>
                                         </Link>
                                     </SidebarMenuButton>
@@ -62,9 +56,6 @@ export function AppSidebar() {
                         </SidebarMenu>
                     </SidebarGroupContent>
                 </SidebarGroup>
-                {/* <div>
-                    <Button>{'Logout'}</Button>
-                </div> */}
             </SidebarFooter>
         </Sidebar>
     )
