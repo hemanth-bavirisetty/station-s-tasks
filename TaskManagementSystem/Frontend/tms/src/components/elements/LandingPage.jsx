@@ -22,10 +22,6 @@ const LandingPage = () => {
             <Link to='login'><button className="bg-white hover:bg-gray-100 text-[#2962FF] font-bold py-2 px-4 rounded border border-[#2962FF] font-montserrat ml-4">Login</button></Link>
           </div>
         </div>
-        <Globe className="top-28" />
-        <div className=''>
-          <GlobeDemo />
-        </div>
 
       </div>
 
