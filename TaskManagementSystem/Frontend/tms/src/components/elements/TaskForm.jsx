@@ -15,6 +15,14 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui";
+import { cn } from "@/lib/utils"
+import { Calendar } from "@/components/ui/calendar"
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@/components/ui/popover"
+import { CalendarIcon } from "lucide-react"
 
 export function TaskForm({ task, onSubmit, onClose }) {
     const { accessTk } = useContext(AuthContext);
@@ -73,6 +81,11 @@ export function TaskForm({ task, onSubmit, onClose }) {
         }
         onClose();
     };
+    const isDateDisabled = (date) => {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0); // Set time to midnight for accurate comparison
+        return date < today;
+    };
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
@@ -90,7 +103,7 @@ export function TaskForm({ task, onSubmit, onClose }) {
                                     required
                                     value={formData.title}
                                     onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                                    className="mt-1 "
+                                    className="mt-1"
                                 />
                             </div>
 
@@ -112,7 +125,7 @@ export function TaskForm({ task, onSubmit, onClose }) {
                                         value={formData.priority}
                                         onValueChange={(value) => setFormData({ ...formData, priority: value })}
                                     >
-                                        <SelectTrigger >
+                                        <SelectTrigger className="mt-1">
                                             <SelectValue placeholder="Select Priority" />
                                         </SelectTrigger>
                                         <SelectContent>
@@ -129,7 +142,7 @@ export function TaskForm({ task, onSubmit, onClose }) {
                                         value={formData.status}
                                         onValueChange={(value) => setFormData({ ...formData, status: value })}
                                     >
-                                        <SelectTrigger >
+                                        <SelectTrigger className="mt-1">
                                             <SelectValue placeholder="Select Status" />
                                         </SelectTrigger>
                                         <SelectContent>
@@ -144,14 +157,47 @@ export function TaskForm({ task, onSubmit, onClose }) {
 
                             <div>
                                 <label className="block text-sm font-medium text-gray-700">Deadline</label>
-                                <Input
-                                    type="date"
-                                    required
-                                    value={formData.deadline}
-                                    onChange={(e) => setFormData({ ...formData, deadline: e.target.value })}
-                                    className="mt-1 block w-full rounded-md"
-                                />
+                                <Popover>
+                                    <PopoverTrigger asChild>
+                                        <Button
+                                            variant={"outline"}
+                                            className={cn(
+                                                "w-full justify-start text-left font-normal",
+                                                !formData.deadline && "text-muted-foreground"
+                                            )}
+                                        >
+                                            <CalendarIcon className="mr-2 h-4 w-4" />
+                                            {formData.deadline ? (
+                                                new Date(formData.deadline).toLocaleDateString()
+                                            ) : (
+                                                <span>Pick a date</span>
+                                            )}
+                                        </Button>
+                                    </PopoverTrigger>
+                                    <PopoverContent className="w-auto p-0">
+                                        <Calendar
+                                            mode="single"
+                                            selected={new Date(formData.deadline)}
+                                            onSelect={(date) => {
+                                                if (date) {
+                                                    console.log(date.toISOString())
+                                                    let year = date.getFullYear();
+                                                    let month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+                                                    let day = String(date.getDate()).padStart(2, '0'); // Ensure two digits for the day
+
+                                                    // Format the date as YYYY-MM-DD
+                                                    let formattedDate = `${year}-${month}-${day}`;
+                                                    setFormData({ ...formData, deadline: formattedDate });
+                                                }
+                                            }}
+                                            disabled={isDateDisabled}
+                                            initialFocus
+
+                                        />
+                                    </PopoverContent>
+                                </Popover>
                             </div>
+
                         </div>
 
                         <div className="mt-6 flex justify-end space-x-3">
@@ -159,7 +205,6 @@ export function TaskForm({ task, onSubmit, onClose }) {
                                 type="button"
                                 onClick={onClose}
                                 variant="outline"
-                                
                             >
                                 Cancel
                             </Button>

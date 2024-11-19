@@ -1,4 +1,4 @@
-import {  CircleUser, Home, Inbox, Settings } from "lucide-react"
+import { CircleUser, Home, Inbox, Settings } from "lucide-react"
 import { Link } from "react-router-dom"
 import {
     Sidebar,
@@ -11,7 +11,7 @@ import {
     SidebarMenuItem,
     SidebarFooter,
 } from "@/components/ui/sidebar"
-import { Button} from "@/components/ui"
+import { Button } from "@/components/ui"
 
 // Menu items.  
 const items = [
@@ -20,11 +20,7 @@ const items = [
         url: "/dashboard",
         icon: Home,
     },
-    {
-        title: "Settings",
-        url: "#",
-        icon: Settings,
-    },
+
     {
         title: "Logout",
         url: "/logout",
@@ -36,10 +32,10 @@ export function AppSidebar() {
     return (
         <Sidebar>
             <SidebarContent>
-                
+
             </SidebarContent>
             <SidebarFooter>
-            <SidebarGroup>
+                <SidebarGroup>
                     <SidebarGroupLabel>Application</SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu>

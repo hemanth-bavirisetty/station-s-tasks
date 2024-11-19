@@ -1,4 +1,4 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -155,10 +155,12 @@ to-blue-500/50  shadow-md p-6">
                     </Link>
                 </CardFooter>
                 <CardFooter className="flex justify-center">
-                    <Button variant="outline" onClick={() => window.history.back()} className="w-full sm:w-auto">
-                        <ArrowLeft className="mr-2" />
-                        Back
-                    </Button>
+                    <Link to='/'>
+                        <Button variant="outline" className="w-full sm:w-auto">
+                            <ArrowLeft className="mr-2" />
+                            Back
+                        </Button>
+                    </Link>
                 </CardFooter>
                 {formStatus && formStatus !== 'Passwords do not match' && (
                     <p className="text-green-500 text-xs italic text-center mt-4">{formStatus}</p>

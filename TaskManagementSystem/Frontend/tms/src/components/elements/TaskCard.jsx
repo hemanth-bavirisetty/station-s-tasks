@@ -43,7 +43,7 @@ export function TaskCard({ task, onStatusChange, onEdit, onDelete }) {
     <Card className="p-4 hover:shadow-md transition-shadow">
       <CardHeader className="p-0 mb-3">
         <div className="flex justify-between items-start">
-          <CardTitle className="font-semibold text-gray-800 line-clamp-1">{task.title}</CardTitle>
+          <CardTitle className="font-semibold text-gray-800 line-clamp-1 py-1">{task.title}</CardTitle>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <button className="p-1 rounded-full hover:bg-gray-100">

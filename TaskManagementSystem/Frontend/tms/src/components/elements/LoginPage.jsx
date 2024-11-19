@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { useState, useContext } from 'react';
 // import { Heart } from "lucide-react";
 import axios from 'axios';
-import { useNavigate,Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { AuthContext } from '../../utils/AuthContext';
 import { ArrowLeft } from 'lucide-react';
 import {
@@ -51,9 +51,9 @@ from-red-500/50
 via-yellow-500/50 
 via-green-500/50 
 to-blue-500/50  shadow-md p-6">
-      
-        
-        <div className=" bg-white rounded-lg w-full max-w-md p-2">
+
+
+      <div className=" bg-white rounded-lg w-full max-w-md p-2">
         <CardHeader>
           <CardTitle className="text-3xl font-bold mb-2">Login</CardTitle>
           <CardDescription className="text-md">Welcome back! Please enter your details.</CardDescription>
@@ -111,25 +111,27 @@ to-blue-500/50  shadow-md p-6">
             </div>
             <div className='lg:flex'>
               <CardFooter className="flex flex-col space-y-4 sm:flex-row sm:justify-between sm:items-center">
-                  
-                  <Link to="/register" className="text-blue-500 hover:text-blue-700 w-full text-center sm:w-auto">
-                      Create an account? Register
-                  </Link>
+
+                <Link to="/register" className="text-blue-500 hover:text-blue-700 w-full text-center sm:w-auto">
+                  Create an account? Register
+                </Link>
               </CardFooter>
               <CardFooter className="flex justify-center">
-                  <Button variant="outline" onClick={() => window.history.back()} className="w-full sm:w-auto">
-                      <ArrowLeft className="mr-2" />
-                      Back
+                <Link to='/'>
+                  <Button variant="outline" className="w-full sm:w-auto">
+                    <ArrowLeft className="mr-2" />
+                    Back
                   </Button>
+                </Link>
               </CardFooter>
-              </div>
+            </div>
           </form>
         </CardContent>
       </div>
-        </div>
-    
-      
-    
+    </div>
+
+
+
   );
 };
 
