@@ -1,8 +1,9 @@
 // src/ProfilePage.js
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
 import { Card, CardHeader, CardContent, CardFooter, Button, Input, Textarea } from '../ui';
 import { Link } from 'react-router-dom';
 import { ChevronLeft } from 'lucide-react';
+import { AuthContext } from '../../utils/AuthContext';
 
 const ProfilePage = () => {
     const [user, setUser] = useState({

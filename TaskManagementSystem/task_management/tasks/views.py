@@ -71,6 +71,9 @@ class LoginView(APIView):
             return Response({
                 "message": "Logged in successfully!",
                 "username": user.username,
+                'email':user.email,
+                'last_name':user.last_name, 
+                'first_name':user.first_name, 
                 "access_token": access_token
             }, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
