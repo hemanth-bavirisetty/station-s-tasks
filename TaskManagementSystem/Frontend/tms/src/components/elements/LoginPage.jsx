@@ -20,7 +20,7 @@ import { Button } from "@/components/ui";
 const LoginPage = () => {
   const { register, handleSubmit, formState: { errors }, setError } = useForm();
   const [loading, setLoading] = useState(false);
-  const { login, setAccessTk } = useContext(AuthContext);
+  const { setUser, login, setAccessTk } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
@@ -29,7 +29,11 @@ const LoginPage = () => {
       const response = await axios.post('http://localhost:8000/api/login/', data);
       setLoading(false);
       // Handle successful login
-      const accessToken = response.data?.access ?? ' ';
+      const accessToken = response.data?.access_token ?? ' ';
+      const userName = response.data?.username ?? ' ';
+
+      setUser(userName);
+      console.log(userName);
       setAccessTk(accessToken);
       console.log(accessToken);
       console.log(response);

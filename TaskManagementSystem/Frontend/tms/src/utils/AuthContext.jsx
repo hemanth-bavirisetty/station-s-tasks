@@ -5,10 +5,7 @@ const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [accessTk, setAccessTk] = useState(' ')
-  const [user, setUser] = useState({
-    username: 'user login'
-
-  })
+  const [user, setUser] = useState(' ')
 
   const login = () => {
     setIsAuthenticated(true);

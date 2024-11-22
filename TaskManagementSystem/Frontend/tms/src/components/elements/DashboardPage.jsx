@@ -9,8 +9,8 @@ import axios from 'axios';
 import { Button } from '../ui';
 
 function DashboardPage() {
-    const { accessTk } = useContext(AuthContext);
-    const { user } = useContext(AuthContext);
+    const { accessTk, user } = useContext(AuthContext);
+
 
     const [tasks, setTasks] = useState(() => {
         const saved = localStorage.getItem('tasks');
@@ -36,7 +36,7 @@ function DashboardPage() {
             console.log(response);
         }
         fetchtasks();
-    },[accessTk]);
+    }, [accessTk]);
 
     useEffect(() => {
         localStorage.setItem('tasks', JSON.stringify(tasks));
@@ -90,15 +90,21 @@ function DashboardPage() {
         <div className="min-h-screen bg-gray-50 ">
             <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center mb-8">
-                    <h1 className="text-3xl font-bold text-gray-900 sm:text-4xl">Task Management</h1>
+                    <div>
+                        <h3 className="text-lg font-semibold text-gray-700 mb-2">
+                            <span className="text-indigo-600">Welcome back!</span> {user}
+                        </h3>
+                        <h1 className="text-3xl font-bold text-gray-900 sm:text-4xl">Task Management</h1>
+                    </div>
                     <Button
                         onClick={() => setShowForm(true)}
-                        className=""
+                        className="flex items-center bg-black text-white px-4 py-2 rounded-md hover:bg-gray-800 transition duration-300"
                     >
                         <PlusCircle className="w-5 h-5 lg:mr-2" />
                         <span className="hidden sm:inline">New Task</span>
                     </Button>
                 </div>
+
 
                 <TaskStats tasks={tasks} />
                 <TaskFilters filters={filters} onFilterChange={setFilters} />
@@ -135,7 +141,7 @@ function DashboardPage() {
                     />
                 )}
             </div>
-        </div>
+        </div >
     );
 }
 

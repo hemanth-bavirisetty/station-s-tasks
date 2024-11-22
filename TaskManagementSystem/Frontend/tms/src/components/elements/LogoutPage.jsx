@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Dialog, DialogContent, DialogTitle, DialogDescription, DialogFooter, Button } from '../ui';
 
 import { Link } from 'react-router-dom';
 
 const LogoutPage = () => {
     const [isOpen, setIsOpen] = useState(true);
-
     const closeDialog = () => {
         setIsOpen(false);
     };

@@ -13,7 +13,7 @@ urlpatterns = [
     path('register/', RegisterView.as_view(), name='register'),
     
     # Login and Get Access & Refresh tokens
-    path('login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('login/', LoginView.as_view(), name='token_obtain_pair'),
     
     # Refresh JWT Access Token
     path('refresh/', TokenRefreshView.as_view(), name='token_refresh'),

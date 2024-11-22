@@ -28,10 +28,6 @@ class TaskListView(generics.ListAPIView):
     ordering_fields = ['created_at', 'deadline']
     ordering = ['created_at']  # Default ordering by creation date
 
-# tasks/views.py
-
-
-
 # Create Task View
 class TaskCreateView(generics.CreateAPIView):
     queryset = Task.objects.all()
@@ -55,8 +51,6 @@ class TaskDeleteView(generics.DestroyAPIView):
     queryset = Task.objects.all()
     permission_classes = [IsAuthenticated]
 
-
-
 # Register view for creating users
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
@@ -72,7 +66,13 @@ class LoginView(APIView):
         if serializer.is_valid():
             user = serializer.validated_data
             login(request, user)
-            return Response({"message": "Logged in successfully!"}, status=status.HTTP_200_OK)
+            refresh = RefreshToken.for_user(user)
+            access_token = str(refresh.access_token)
+            return Response({
+                "message": "Logged in successfully!",
+                "username": user.username,
+                "access_token": access_token
+            }, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class LogoutView(APIView):
@@ -82,8 +82,3 @@ class LogoutView(APIView):
         # Logout the user and delete the session
         logout(request)
         return Response({"message": "Logged out successfully!"}, status=status.HTTP_200_OK)
-
-
-
-
-

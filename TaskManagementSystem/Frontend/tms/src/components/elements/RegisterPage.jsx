@@ -51,12 +51,8 @@ const RegisterPage = () => {
     };
 
     return (
-        <div className="flex justify-center items-center h-full  lg:py-10 lg:px-2 mx-auto bg-gradient-to-br
-from-red-500/50 
-via-yellow-500/50 
-via-green-500/50 
-to-blue-500/50  shadow-md p-6">
-            <Card className="w-full h-full max-w-md p-4 sm:p-6 md:p-8">
+        <div className="flex justify-center items-center h-screen  lg:py-10 lg:px-2 mx-auto bg-gradient-to-br from-red-500/50 via-yellow-500/50 via-green-500/50 to-blue-500/50  shadow-md p-6">
+            <Card className="w-full  max-w-md p-4 sm:p-6 md:p-8">
                 <CardHeader>
                     <CardTitle className="text-3xl font-bold mb-4">Register</CardTitle>
                     <CardDescription className="text-md">Create a new account</CardDescription>

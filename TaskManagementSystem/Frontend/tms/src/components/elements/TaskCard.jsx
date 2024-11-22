@@ -57,7 +57,7 @@ export function TaskCard({ task, onStatusChange, onEdit, onDelete }) {
               <DropdownMenuItem
                 onClick={async function () {
                   try {
-                    const response = await axios.delete(`http://localhost:8000/api/tasks/delete/${task.id ?? task.taskid}/`, {
+                    const response = await axios.delete(`http://localhost:8000/api/tasks/delete/${task.taskid ?? task.id}/`, {
                       headers: {
                         'Authorization': 'Bearer ' + accessTk,
                       }
@@ -84,7 +84,7 @@ export function TaskCard({ task, onStatusChange, onEdit, onDelete }) {
             <Flag className="w-3 h-3 inline-block mr-1" />
             {task.priority.charAt(0).toUpperCase() + task.priority.slice(1)}
           </span>
-          <Select 
+          <Select
             value={task.status}
             onValueChange={(value) => onStatusChange(task.id, value)}
           >
